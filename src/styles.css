@@ -46,11 +46,105 @@ select {
 	font-family: inherit;
 }
 
+/* ANIMACIONES GENERALES */
+
+.reveal {
+	opacity: 0;
+	transform: translateY(35px);
+	transition:
+		opacity 0.8s ease,
+		transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Entradas laterales */
+
+.reveal-left {
+	opacity: 0;
+	transform: translateX(-60px);
+	transition: all 0.9s ease;
+}
+
+.reveal-right {
+	opacity: 0;
+	transform: translateX(60px);
+	transition: all 0.9s ease;
+}
+
+.reveal-left.visible,
+.reveal-right.visible {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* Aparición con escala */
+
+.reveal-scale {
+	opacity: 0;
+	transform: scale(0.92);
+	transition: all 0.8s ease;
+}
+
+.reveal-scale.visible {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* Movimiento flotante */
+
+@keyframes flotar {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-12px);
+	}
+}
+
+/* Movimiento de botones */
+
+.button-encuentro,
+.hero-button,
+.sumate-form button {
+	transition: transform 0.3s ease;
+}
+
+.button-encuentro:hover,
+.hero-button:hover,
+.sumate-form button:hover {
+	transform: translateY(-4px);
+}
+
+/* Accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+
+	.reveal,
+	.reveal-left,
+	.reveal-right,
+	.reveal-scale {
+		opacity: 1;
+		transform: none;
+	}
+}
+
 /* =================================
    NAVBAR
 ================================= */
 
 .site-header {
+	position: relative;
 	width: 100%;
 	height: 65px;
 	padding: 0 24px 0 12px;
@@ -58,8 +152,8 @@ select {
 	align-items: center;
 	justify-content: space-between;
 	background-color: #f3eedb;
+	z-index: 90;
 }
-
 /* LOGO */
 
 .brand-header {
@@ -124,6 +218,8 @@ select {
 .hero-river {
 	position: absolute;
 	inset: 0;
+	top: -28vw;
+
 	background-image: url("/assets/element-01.webp");
 	background-position: center;
 	background-size: cover;
@@ -168,7 +264,7 @@ select {
 
 .hero-location {
 	position: absolute;
-	top: 18%;
+	top: 11%;
 	width: 100%;
 	margin: 0;
 
@@ -190,7 +286,7 @@ select {
 	color: #fff4df;
 
 	border-radius: 12px;
-	font-size: 1cqw;
+	font-size: 1.3cqw;
 	font-weight: 700;
 	white-space: nowrap;
 }
@@ -220,7 +316,7 @@ select {
 	margin: 0;
 
 	color: #fff4df;
-	font-size: 1.8cqw;
+	font-size: 1.6cqw;
 	font-style: italic;
 }
 
@@ -234,7 +330,7 @@ select {
 
 	color: #fff4df;
 	font-size: 2cqw;
-	font-weight: 700;
+	font-weight: 400;
 	font-style: italic;
 }
 
@@ -246,14 +342,14 @@ select {
 	left: 50%;
 	transform: translateX(-50%);
 
-	padding: 1.1% 2.5%;
+	padding: 1.1% 3%;
 
 	background: #82a9a8;
 	color: #fff4df;
 
 	border-radius: 12px;
 	font-size: 1.6cqw;
-	font-weight: 700;
+	font-weight: 500;
 	text-decoration: none;
 	white-space: nowrap;
 }
@@ -264,59 +360,73 @@ select {
 
 /* FONDO */
 
+/* FONDO VERDE */
 .encuentro-background {
 	position: absolute;
 	inset: 0;
-	left: 6%;
-	top: -10%;
-	width: 100%;
-	height: 100%;
-	background-image: url("/assets/elementos-fondo-03.png");
+	left: 18%;
+	top: -9%;
+	width: 90%;
+	height: 82%;
+	background-image: url(/assets/elementos-fondo-03.png);
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 	z-index: 4;
+	pointer-events: none;
 }
-/* OLLA */
 
+/* OLLA */
 .encuentro-pot {
 	position: relative;
-	left: 0%;
-	width: 60%;
-	top: -26%;
-	height: auto;
-	object-fit: cover;
+	left: -17%;
+	width: 100%;
+	top: -51%;
+	height: 194%;
+	object-fit: contain;
 	z-index: 3;
 }
 
-/* PAPEL RASGADO */
+/* FUEGO */
+.encuentro-fire {
+	position: absolute;
+	width: 60%;
+	height: auto;
+	left: 5%;
+	bottom: 40%;
+	z-index: 3;
+	pointer-events: none;
+}
+/* PAPEL */
+.encuentro-paper {
+	z-index: 6;
+}
 
+/* PAPEL RASGADO */
 .encuentro-paper {
 	position: absolute;
-	right: 0%;
-	top: 21%;
+	right: -4%;
+	top: 9%;
 	width: 73%;
-	height: 68%;
+	height: 50%;
 	object-fit: fill;
 	z-index: 4;
 }
 
 /* CONTENIDO */
-
 .encuentro-content {
 	position: absolute;
-	top: 35%;
-	right: 16%;
+	top: 21%;
+	right: 12%;
 	width: 39%;
 	z-index: 5;
 	text-align: center;
 	color: #a6422e;
 }
-
 /* NÚMERO */
 .encuentro-number {
 	position: absolute;
-	top: -86%;
+	top: -73%;
 	left: -100%;
 	z-index: 10;
 	color: white;
@@ -432,7 +542,7 @@ select {
 	position: relative;
 	width: 100%;
 	aspect-ratio: 1136 / 650;
-	margin-top: -31vw;
+	margin-top: -56vw;
 	overflow: hidden;
 	container-type: inline-size;
 	z-index: 1;
@@ -529,7 +639,7 @@ select {
 	position: absolute;
 	inset: 0;
 	background-image: url(/assets/elementos-fondo-05.webp);
-	background-size: 106% 100%;
+	background-size: 100% 100%;
 	background-position: top;
 	background-repeat: no-repeat;
 }
@@ -686,7 +796,7 @@ select {
 	position: absolute;
 	inset: 0;
 	background-image: url(/assets/fondo-estirado-06.webp);
-	background-size: 106% 100%;
+	background-size: 100% 100%;
 	background-position: top;
 	background-repeat: no-repeat;
 }
@@ -704,7 +814,7 @@ select {
 	position: relative;
 	width: 100%;
 	aspect-ratio: 1038 / 552;
-	overflow: hidden;
+	overflow: visible;
 	container-type: inline-size;
 	margin-top: -9vw;
 	z-index: 5;
@@ -723,11 +833,13 @@ select {
 /* Cítricos */
 .sumate-citricos {
 	position: absolute;
-	width: 54%;
-	left: 0;
-	top: -7%;
+	width: 71%;
+	left: -167px;
+	top: -30%;
 	height: auto;
 	z-index: 2;
+	overflow: visible;
+	clip-path: inset(0 0 11% 0);
 }
 
 /* Texto y formulario */
@@ -790,7 +902,7 @@ select {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	margin-top: -8%;
+	margin-top: -9%;
 }
 
 .mapa-contenedor {
@@ -799,6 +911,7 @@ select {
 	aspect-ratio: 901 / 453;
 	background-color: #a5a922;
 }
+
 /* VENTANA DEL MAPA */
 
 .mapa-ventana {
@@ -938,7 +1051,8 @@ select {
 .site-footer {
 	position: relative;
 	width: 100%;
-	aspect-ratio: 1136 / 491;
+	aspect-ratio: 1136 / 400;
+	background-color: #747b29;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -949,13 +1063,14 @@ select {
 	margin-top: -17%;
 	z-index: 5;
 }
-/* Imagen completa de fondo */
 .footer-background {
 	position: absolute;
-	inset: 0;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: fill;
+	object-fit: cover;
+	object-position: center top;
 	z-index: 0;
 	pointer-events: none;
 }
@@ -968,8 +1083,8 @@ select {
 }
 
 .brand-footer {
-	width: 17vw;
-	margin-top: -15vw;
+	width: 19vw;
+	margin-top: 5vw;
 }
 
 .brand-footer img {
@@ -977,7 +1092,7 @@ select {
 }
 
 .site-footer p {
-	margin: 3px 0;
+	margin: 10px 0;
 	font-size: 14px;
 }
 
@@ -997,4 +1112,65 @@ select {
 	right: 3%;
 	bottom: 8%;
 	font-size: 25px;
+}
+.footer-nav {
+	margin-top: 3vw;
+	gap: 3vw;
+}
+
+.footer-socials {
+	margin-top: 2vw;
+}
+
+.instagram-handle {
+	margin-top: 2vw;
+}
+
+.footer-copy {
+	margin-top: 0.8vw;
+	font-size: 0.8rem;
+	opacity: 0.85;
+}
+
+.footer-nav {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 1.2vw;
+	margin-top: 3vw;
+}
+
+.footer-nav a {
+	color: #f5e9d1;
+	text-decoration: none;
+	font-size: clamp(13px, 1.1vw, 18px);
+	font-weight: 600;
+	transition: color 0.3s ease;
+}
+
+.footer-nav span {
+	color: #a6a83a;
+	font-size: 13px;
+}
+
+.footer-nav a:hover {
+	color: #d9d95b;
+}
+.pescado-recorte {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 85%; /* Ajustá este valor para recortar más o menos */
+	overflow: hidden;
+	z-index: 2;
+}
+
+.pescado-recorte img {
+	width: 100%;
+	height: auto;
+	display: block;
 }

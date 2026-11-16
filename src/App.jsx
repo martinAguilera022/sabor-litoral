@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { motion } from "motion/react";
 function Ubicacion() {
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -20,6 +21,7 @@ const initialPosition = useRef({ x: 0, y: 0 });
       y: Math.max(-maxY, Math.min(maxY, y))
     };
   };
+
 
   const cambiarZoom = (cantidad) => {
     setZoom((actual) => {
@@ -81,7 +83,7 @@ const initialPosition = useRef({ x: 0, y: 0 });
     <section className="ubicacion" id="ubicacion">
 
       <div className="mapa-contenedor">
-
+<div className="mascara-ala"></div>
         <div
           className={`mapa-ventana ${zoom > 1 ? 'mapa-zoom' : ''}`}
           onPointerDown={iniciarArrastre}
@@ -232,6 +234,7 @@ function SpeakerGroup({ day, people }) {
 
 // Página principal
 export default function App() {
+    
   return (
     <>
       {/* ENCABEZADO */}
@@ -256,13 +259,28 @@ export default function App() {
         <section className="hero" id="inicio">
           <div className="hero-river"></div>
 
-          <img
-            className="hero-decoration"
-            src={`${ASSETS}elementos fondo.png`}
-            alt=""
-          />
+         <motion.img
+  className="hero-decoration"
+  src={`${ASSETS}elementos-fondo.webp`}
+  alt=""
+  initial={{ opacity: 0, y: 180 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 2.5,
+    delay: 0.5,
+    ease: [0.22, 1, 0.36, 1]
+  }}
+/>
 
-          <div className="hero-content">
+  <motion.div
+  className="hero-content"
+  initial={{ opacity: 0, y: 100 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 2.6,
+    ease: [0.22, 1, 0.36, 1]
+  }}
+>
             <p className="hero-location">Paraná, Entre Ríos</p>
 
             <span className="welcome-pill">BIENVENIDOS A</span>
@@ -282,7 +300,7 @@ export default function App() {
             <a href="#festival" className="hero-button">
               Descubrí el festival →
             </a>
-          </div>
+          </motion.div>
         </section>
 
         {/* SECCIÓN 01 - EL ENCUENTRO */}
@@ -295,13 +313,29 @@ export default function App() {
             alt="Olla tradicional sobre el fuego"
           />
     
+  <img
+    className="encuentro-fire"
+    src={`${ASSETS}element-05.webp`}
+    alt=""
+  />
           <img
             className="encuentro-paper"
             src={`${ASSETS}Elementos-17.png`}
             alt=""
           />
 
-          <div className="encuentro-content">
+         <motion.div
+  className="encuentro-content"
+  initial={{ opacity: 0, x: 150 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true, amount: 0.1 }}
+  transition={{
+    duration: 2,
+    delay: 0.2,
+    ease: [0.22, 1, 0.36, 1]
+  }}
+>
+
             <span className="encuentro-number">
               01 / EL ENCUENTRO
             </span>
@@ -322,7 +356,8 @@ export default function App() {
             <a href="#entradas" className="button-encuentro">
               COMPRAR ENTRADAS ↗
             </a>
-          </div>
+        
+</motion.div>
         </section>
         
 <section className="saberes" id="charlas">
@@ -388,6 +423,7 @@ export default function App() {
   />
 
   {/* Ilustración de cítricos */}
+  
   <img
     className="sumate-citricos"
     src="/assets/Elementos-06.webp"
@@ -418,7 +454,8 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-    <footer className="site-footer">
+   
+<footer className="site-footer">
   <img
     className="footer-background"
     src="/assets/fondo-estirado-08.webp"
@@ -430,14 +467,34 @@ export default function App() {
   </a>
 
   <p>Sabores que nos representan.</p>
-  <p className="footer-location">Paraná, Entre Ríos, Argentina</p>
+  <p className="footer-location">
+    Paraná, Entre Ríos, Argentina
+  </p>
 
-  <a className="instagram-handle" href="#">
+  
+<nav className="footer-nav">
+  <a href="#festival">Festival</a>
+  <span>✳</span>
+  <a href="#charlas">Charlas</a>
+  <span>✳</span>
+  <a href="#ubicacion">Ubicación</a>
+  <span>✳</span>
+  <a href="#emprendedores">Emprendedores</a>
+</nav>
+
+ 
+
+  <a className="instagram-handle" href="https://www.instagram.com/saborlitoral_parana/" target="_blank" rel="noreferrer">
     @saborlitoral_paraná
   </a>
 
+  <p className="footer-copy">
+    © 2026 Sabor Litoral. Todos los derechos reservados.
+  </p>
+
   <a className="back-top" href="#inicio">↑</a>
 </footer>
+
     </>
   );
 }
