@@ -1,0 +1,43 @@
+.site-header {
+	width: 100%;
+	height: 65px;
+	padding: 0 24px 0 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #f3eedb;
+	position: relative;
+	z-index: 100;
+	box-sizing: border-box;
+}
+.brand-header img {
+	width: 215px;
+	height: auto;
+}
+
+.main-nav {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+
+.main-nav a {
+	color: #a6422e;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.main-nav .nav-ticket {
+	width: 106px;
+	height: 33px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url("/assets/element-02.webp");
+	background-size: 145px 86px;
+	background-position: center;
+	color: white;
+	font-size: 10px;
+	font-weight: 700;
+}

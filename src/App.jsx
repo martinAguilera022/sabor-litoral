@@ -1,5 +1,8 @@
 import { useState, useRef } from 'react';
 import { motion } from "motion/react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Entradas from "./pages/Entradas";
+import Cronograma from "./pages/Cronograma";
 function Ubicacion() {
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -79,60 +82,65 @@ const initialPosition = useRef({ x: 0, y: 0 });
     setDragging(false);
   };
 
-  return (
-    <section className="ubicacion" id="ubicacion">
+ return (
+  <motion.section
+    className="ubicacion"
+    id="ubicacion"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: "easeInOut" }}
+  >
 
-      <div className="mapa-contenedor">
-<div className="mascara-ala"></div>
-        <div
-          className={`mapa-ventana ${zoom > 1 ? 'mapa-zoom' : ''}`}
-          onPointerDown={iniciarArrastre}
-          onPointerMove={moverMapa}
-          onPointerUp={terminarArrastre}
-          onPointerCancel={terminarArrastre}
-          onLostPointerCapture={terminarArrastre}
-        >
-          <img
-            className="mapa-imagen"
-            src="/assets/mapita-23.webp"
-            alt="Mapa del predio del festival"
-            draggable="false"
-            style={{
-              transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`
-            }}
-          />
-        </div>
+    <div className="mapa-contenedor">
+      <div className="mascara-ala"></div>
 
+      <div
+        className={`mapa-ventana ${zoom > 1 ? 'mapa-zoom' : ''}`}
+        onPointerDown={iniciarArrastre}
+        onPointerMove={moverMapa}
+        onPointerUp={terminarArrastre}
+        onPointerCancel={terminarArrastre}
+        onLostPointerCapture={terminarArrastre}
+      >
         <img
-          className="mapa-marco"
-          src="/assets/mapita-21.webp"
-          alt=""
+          className="mapa-imagen"
+          src="/assets/mapita-23.webp"
+          alt="Mapa del predio del festival"
+          draggable="false"
+          style={{
+            transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`
+          }}
         />
-
-        <div className="mapa-controles">
-
-          <button
-            onClick={() => cambiarZoom(0.2)}
-            aria-label="Acercar"
-            type="button"
-          >
-            +
-          </button>
-
-          <button
-            onClick={() => cambiarZoom(-0.2)}
-            aria-label="Alejar"
-            type="button"
-          >
-            −
-          </button>
-
-        </div>
-
       </div>
-    </section>
-  );
-}
+
+      <img
+        className="mapa-marco"
+        src="/assets/mapita-21.webp"
+        alt=""
+      />
+
+      <div className="mapa-controles">
+        <button
+          onClick={() => cambiarZoom(0.2)}
+          aria-label="Acercar"
+          type="button"
+        >
+          +
+        </button>
+
+        <button
+          onClick={() => cambiarZoom(-0.2)}
+          aria-label="Alejar"
+          type="button"
+        >
+          −
+        </button>
+      </div>
+    </div>
+
+  </motion.section>
+);}
 const ASSETS = '/assets/';
 
 // Invitados del festival
@@ -233,7 +241,7 @@ function SpeakerGroup({ day, people }) {
 }
 
 // Página principal
-export default function App() {
+function Home() {
     
   return (
     <>
@@ -248,7 +256,7 @@ export default function App() {
           <a href="#charlas">Charlas</a>
           <a href="#ubicacion">Ubicación</a>
           <a href="#emprendedores">Emprendedores</a>
-          <a href="#entradas" className="nav-ticket">
+          <a href="/entradas" className="nav-ticket">
             MIS ENTRADAS
           </a>
         </nav>
@@ -312,65 +320,93 @@ export default function App() {
             src={`${ASSETS}element-04.webp`}
             alt="Olla tradicional sobre el fuego"
           />
-    
-  <img
-    className="encuentro-fire"
-    src={`${ASSETS}element-05.webp`}
-    alt=""
-  />
-          <img
-            className="encuentro-paper"
-            src={`${ASSETS}Elementos-17.png`}
-            alt=""
-          />
-
-         <motion.div
-  className="encuentro-content"
-  initial={{ opacity: 0, x: 150 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  viewport={{ once: true, amount: 0.1 }}
-  transition={{
-    duration: 2,
-    delay: 0.2,
-    ease: [0.22, 1, 0.36, 1]
+  <motion.img
+  className="encuentro-fire"
+  src={`${ASSETS}element-05.webp`}
+  alt=""
+  animate={{
+    y: [0, -8, 0, -5, 0],
+    scaleY: [1, 1.04, 0.98, 1.03, 1],
+    scaleX: [1, 1.02, 0.99, 1.01, 1],
+    rotate: [0, -0.5, 0.5, -0.3, 0]
   }}
->
+  transition={{
+    duration: 2.5,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }}
+/>
+   <motion.img
+      className="encuentro-paper"
+            src={`${ASSETS}Elementos-17.webp`}
+            alt=""
+      initial={{ opacity: 0, x: 180 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+    >
+</motion.img>
+         <div
+  className="encuentro-content" >
 
-            <span className="encuentro-number">
-              01 / EL ENCUENTRO
-            </span>
+            <motion.span
+      className="encuentro-number"
+      initial={{ opacity: 0, x: -150 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 2, ease: "easeOut" }}
+    >
+      01 / EL ENCUENTRO
+    </motion.span>
+ <motion.div
+      initial={{ opacity: 0, x: 180 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <img
+        className="titulo-encuentro"
+        src={`${ASSETS}Elementos-13.webp`}
+        alt=""
+      />
 
-            <img className="titulo-encuentro" src={`${ASSETS}Elementos-13.png`} alt="" />
+      <p>
+        Sabor Litoral es un encuentro que celebra la identidad
+        gastronómica de Entre Ríos. Un espacio para descubrir
+        la cocina de río, conocer a sus productores y poner en
+        valor la pesca sustentable y los cítricos de nuestra tierra.
+      </p>
 
-            <p>
-              Sabor Litoral es un encuentro que celebra la identidad
-              gastronómica de Entre Ríos. Un espacio para descubrir
-              la cocina de río, conocer a sus productores y poner en
-              valor la pesca sustentable y los cítricos de nuestra tierra.
-            </p>
+      <p className="encuentro-highlight">
+        Tradición pesquera, compromiso ambiental.
+      </p>
 
-            <p className="encuentro-highlight">
-              Tradición pesquera, compromiso ambiental.
-            </p>
-
-            <a href="#entradas" className="button-encuentro">
-              COMPRAR ENTRADAS ↗
-            </a>
+      <a href="/entradas" className="button-encuentro">
+        COMPRAR ENTRADAS ↗
+      </a>
+    </motion.div>
         
-</motion.div>
+</div>
         </section>
-        
-<section className="saberes" id="charlas">
+ <section className="saberes" id="charlas">
+  {/* Fondo estático */}
   <div className="saberes-background"></div>
 
-  <div className="saberes-content">
+  {/* Contenido que aparece */}
+  <motion.div
+    className="saberes-content"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: "easeInOut" }}
+  >
     <span className="saberes-number">
       02 / SABERES DEL LITORAL
     </span>
 
     <img
       className="saberes-title"
-      src="/assets/Elementos-12.png"
+      src="/assets/Elementos-12.webp"
       alt="Voces que alimentan"
     />
 
@@ -378,59 +414,102 @@ export default function App() {
       Conocé a los especialistas, cocineros y productores
       que compartirán sus experiencias durante el encuentro.
     </p>
-  </div>
+  </motion.div>
 
-  <img
+  {/* Decoración que aparece */}
+  <motion.img
     className="saberes-decoration"
     src="/assets/elementos-17.webp"
     alt=""
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, delay: 0.3, ease: "easeInOut" }}
   />
 </section>
-
 <section className="invitados-dia">
   <div className="invitados-fondo"></div>
 
-  
-<img
-  className="invitados-escamas"
-  src="/assets/Elementos-07.webp"
-  alt=""
-/>
-<SpeakerGroup day={1} people={speakersDay1} />
+  <motion.img
+    className="invitados-escamas"
+    src="/assets/Elementos-07.webp"
+    alt=""
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+  />
 
-  <button className="invitados-cronograma">
+  <motion.div
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+  >
+    <SpeakerGroup day={1} people={speakersDay1} />
+  </motion.div>
+
+  <motion.button
+    className="invitados-cronograma"
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+  >
     CRONOGRAMA COMPLETO DÍA 1
-  </button>
+  </motion.button>
 </section>
 
 <section className="invitados-dia2">
   <div className="invitados-fondo2"></div>
 
+ <motion.div
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+  >
+    <SpeakerGroup day={2} people={speakersDay2} />
+  </motion.div>
 
-<SpeakerGroup day={2} people={speakersDay2} />
-
-  <button className="invitados-cronograma">
+  <motion.button
+    className="invitados-cronograma"
+    initial={{ opacity: 0, y: 100 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+  >
     CRONOGRAMA COMPLETO DÍA 2
-  </button>
+  </motion.button>
 </section>
 <section className="sumate" id="emprendedores">
 
-  {/* Imagen de fondo */}
+  {/* Imagen de fondo estática */}
   <img
     className="sumate-fondo"
     src="/assets/fondo-estirado-07.webp"
     alt=""
   />
 
-  {/* Ilustración de cítricos */}
-  
-  <img
+  {/* Cítricos: entran desde la izquierda */}
+  <motion.img
     className="sumate-citricos"
     src="/assets/Elementos-06.webp"
     alt=""
+    initial={{ opacity: 0, x: -180 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
   />
 
-  <div className="sumate-content">
+  {/* Contenido: entra desde la derecha */}
+  <motion.div
+    className="sumate-content"
+    initial={{ opacity: 0, x: 180 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+  >
     <span className="sumate-number">
       03 / <strong>SÚMATE AL ENCUENTRO</strong>
     </span>
@@ -447,7 +526,7 @@ export default function App() {
       <input type="text" placeholder="Tu contacto..." />
       <button type="submit">ENVIAR SOLICITUD</button>
     </form>
-  </div>
+  </motion.div>
 
 </section>
 <Ubicacion/>
@@ -496,5 +575,16 @@ export default function App() {
 </footer>
 
     </>
+  );
+}
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/entradas" element={<Entradas />} />
+        <Route path="/cronograma" element={<Cronograma />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

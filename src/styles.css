@@ -339,8 +339,7 @@ select {
 .hero-button {
 	position: absolute;
 	top: 80%;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 40%;
 
 	padding: 1.1% 3%;
 
@@ -368,7 +367,7 @@ select {
 	top: -9%;
 	width: 90%;
 	height: 82%;
-	background-image: url(/assets/elementos-fondo-03.png);
+	background-image: url(/assets/elementos-fondo-03.webp);
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -392,7 +391,7 @@ select {
 	position: absolute;
 	width: 60%;
 	height: auto;
-	left: 5%;
+	left: -5%;
 	bottom: 40%;
 	z-index: 3;
 	pointer-events: none;
@@ -455,7 +454,7 @@ select {
 
 /* DESCRIPCIÓN */
 
-.encuentro-content > p {
+.encuentro-content p {
 	margin: 0;
 	font-size: 1.3cqw;
 	line-height: 1.5;
@@ -562,7 +561,7 @@ select {
 	inset: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url("/assets/elementos-fondo-04.png");
+	background-image: url("/assets/elementos-fondo-04.webp");
 	background-size: 100% 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -734,7 +733,7 @@ select {
 .invitados-cronograma {
 	position: absolute;
 	top: 76%;
-	left: 50%;
+	left: 37%;
 	transform: translateX(-50%);
 	padding: 1.2% 2.5%;
 	border: none;
@@ -744,6 +743,7 @@ select {
 	font-size: 1.5cqw;
 	font-weight: 700;
 }
+
 .speaker-day {
 	position: relative;
 	width: 100%;

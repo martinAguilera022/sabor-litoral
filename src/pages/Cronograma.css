@@ -1,0 +1,215 @@
+.cronograma-page {
+	--crema: #f7f0df;
+	--azul: #9db4bc;
+	--terracota: #cf503b;
+
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	padding: 0 7% 9%;
+	overflow: hidden;
+	background: var(--crema);
+	color: #171717;
+}
+
+.cronograma-contenido {
+	position: relative;
+	z-index: 1;
+	margin-top: 14%;
+}
+
+/* ONDAS SUPERIORES E INFERIORES */
+
+.cronograma-ondas {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 112vw;
+	max-height: 109%;
+	min-height: 6%;
+	background-image: url(/assets/tramas-36.png);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: top;
+	pointer-events: none;
+	z-index: 0;
+	margin-top: -57%;
+}
+
+.cronograma-ondas-superior {
+	top: 0;
+}
+
+.cronograma-ondas-debajo {
+	bottom: 0;
+}
+.cronograma-ondas-debajo {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1440 / 300; /* Reemplazar por la proporción real de tu imagen */
+
+	transform: none;
+	pointer-events: none;
+	z-index: 0;
+}
+/* TITULO */
+
+.cronograma-titulo {
+	display: block;
+	position: relative;
+	width: 45%;
+	max-width: 45%;
+	height: auto;
+	margin: 4% 0 -2.5% -6%;
+}
+
+/* ENCABEZADO */
+
+.cronograma-subencabezado {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 4%;
+	margin-bottom: 1%;
+}
+
+.cronograma-subencabezado > p {
+	margin: 0;
+	font-size: clamp(1rem, 1vw, 1.2%);
+	font-weight: 700;
+	margin-left: 1%;
+}
+
+.cronograma-tematica {
+    position:relative;
+	width: 30%;
+	flex-shrink: 0;
+	margin-top: -7%;
+	padding: 5% 3%;
+    left:20%;
+	background-image: url("/assets/fondo-dia-1-eje.png");
+	background-size: 119% 210%;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	text-align: center;
+	font-size: clamp(9px, 1.1vw, 13px);
+	font-weight: 600;
+	line-height: 1.3;
+}
+/* TABLA */
+
+.cronograma-tabla {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	position: relative;
+	z-index: 1;
+}
+
+.cronograma-tabla th {
+	color: var(--terracota);
+	text-align: start;
+	font-size: clamp(1rem, 1.35vw, 1.5%);
+	padding: 1% 1.5%;
+	border-bottom: 2px solid var(--azul);
+}
+
+.cronograma-tabla th:first-child {
+	text-align: start;
+	width: 22%;
+}
+.cronograma-tabla td:first-child {
+	width: 22%;
+	text-align: center;
+	border-right: 1px solid var(--azul);
+}
+
+.cronograma-tabla td {
+	padding: 1.4% 4%;
+	font-size: clamp(1rem, 1vw, 1.2%);
+	line-height: 1.25;
+	border-bottom: 1px solid var(--azul);
+}
+
+.cronograma-tabla td:first-child {
+	padding: 1.4% 1%;
+	color: var(--terracota);
+	font-weight: 700;
+}
+
+.cronograma-tabla td strong {
+	color: var(--terracota);
+	font-style: italic;
+}
+
+.cronograma-tabla .fila-suave {
+	background: rgba(157, 180, 188, 0.28);
+}
+
+.cronograma-tabla .fila-suave td:first-child {
+	color: #829eac;
+}
+.cronograma-tabla {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.cronograma-tabla th,
+.cronograma-tabla td {
+	border-bottom: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 5' preserveAspectRatio='none'%3E%3Cpath d='M0 2.5 Q120 1 250 2.7 T500 2.2 T750 2.8 T1000 2' fill='none' stroke='%239db4bc' stroke-width='2'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-size: 100% 3px;
+	background-position: bottom;
+}
+.cronograma-tabla th:first-child,
+.cronograma-tabla td:first-child {
+	border-right: 1px solid var(--azul);
+}
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+	.cronograma-page {
+		padding: 0 7% 20%;
+	}
+
+	.cronograma-titulo {
+		width: 72%;
+		margin-top: 13%;
+		margin-bottom: 3%;
+	}
+
+	.cronograma-subencabezado {
+		flex-direction: column;
+		gap: 2%;
+	}
+
+	.cronograma-tematica {
+		width: 55%;
+		align-self: flex-end;
+		margin-top: -2%;
+	}
+
+	.cronograma-tabla th {
+		font-size: 1.1%;
+	}
+
+	.cronograma-tabla td {
+		padding: 2.2% 3%;
+		font-size: 0.9%;
+	}
+
+	.cronograma-tabla th:first-child,
+	.cronograma-tabla td:first-child {
+		width: 22%;
+	}
+
+	.cronograma-ondas {
+		height: 12%;
+		background-size: 100% auto;
+	}
+}
