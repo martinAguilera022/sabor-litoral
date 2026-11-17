@@ -234,3 +234,8 @@
 .cronograma-dia2 .cronograma-tabla tr.fila-suave td:first-child {
 	color: #cf503b;
 }
+.cronograma-page{
+	
+	zoom: 1.25;
+
+}

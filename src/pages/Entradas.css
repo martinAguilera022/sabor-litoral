@@ -314,13 +314,13 @@
 
 .pack-contenido > strong {
 	display: block;
-	margin-bottom: 4%;
+	margin-bottom: 2%;
 	font-size: clamp(9px, 2.5vw, 24px);
 }
 
 .pack-contenido p {
 	margin: 0;
-	font-size: clamp(8px, 1.2vw, 20px);
+	font-size: clamp(8px, 1.2vw, 15px);
 	line-height: 1.2;
 	width: 81%;
 }
@@ -541,8 +541,10 @@
 	transition: transform 0.2s ease;
 }
 
-
-
 .selector-cantidad button:hover {
 	transform: scale(1.12);
+}
+/* Ajuste visual para escritorio */
+.entradas-page {
+	zoom: 1.25;
 }
