@@ -245,25 +245,37 @@ function SpeakerGroup({ day, people }) {
 // Página principal
 function Home() {
      const navigate = useNavigate();
-
+const [menuAbierto, setMenuAbierto] = useState(false);
   return (
     <>
-      {/* ENCABEZADO */}
-      <header className="site-header">
-        <a className="brand-header" href="#inicio">
-          <img src={`${ASSETS}element-03.webp`} alt="Sabor Litoral" />
-        </a>
+ 
+  
+    <header className="site-header">
+      <a className="brand-header" href="#inicio">
+        <img src={`${ASSETS}element-03.webp`} alt="Sabor Litoral" />
+      </a>
 
-        <nav className="main-nav">
-          <a href="#festival">Festival</a>
-          <a href="#charlas">Charlas</a>
-          <a href="#ubicacion">Ubicación</a>
-          <a href="#emprendedores">Emprendedores</a>
-          <a href="/entradas" className="nav-ticket">
-            MIS ENTRADAS
-          </a>
-        </nav>
-      </header>
+      <button
+        className={`menu-hamburguesa ${menuAbierto ? "activo" : ""}`}
+        onClick={() => setMenuAbierto(!menuAbierto)}
+        aria-label="Abrir menú"
+        aria-expanded={menuAbierto}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav className={`main-nav ${menuAbierto ? "menu-abierto" : ""}`}>
+        <a href="#festival" onClick={() => setMenuAbierto(false)}>Festival</a>
+        <a href="#charlas" onClick={() => setMenuAbierto(false)}>Charlas</a>
+        <a href="#ubicacion" onClick={() => setMenuAbierto(false)}>Ubicación</a>
+        <a href="#emprendedores" onClick={() => setMenuAbierto(false)}>Emprendedores</a>
+        <a href="/entradas" className="nav-ticket">MIS ENTRADAS</a>
+      </nav>
+    </header>
+
+
 
       <main>
         {/* HERO */}
