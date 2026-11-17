@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Entradas from "./pages/Entradas";
 import Cronograma from "./pages/Cronograma";
+import Cronograma2 from "./pages/Cronograma2";
 function Ubicacion() {
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -242,7 +244,8 @@ function SpeakerGroup({ day, people }) {
 
 // Página principal
 function Home() {
-    
+     const navigate = useNavigate();
+
   return (
     <>
       {/* ENCABEZADO */}
@@ -451,6 +454,7 @@ function Home() {
 
   <motion.button
     className="invitados-cronograma"
+     onClick={() => navigate("/cronograma")}
     initial={{ opacity: 0, y: 100 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.1 }}
@@ -474,6 +478,7 @@ function Home() {
 
   <motion.button
     className="invitados-cronograma"
+    onClick={() => navigate("/cronograma-2")}
     initial={{ opacity: 0, y: 100 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.1 }}
@@ -584,6 +589,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/entradas" element={<Entradas />} />
         <Route path="/cronograma" element={<Cronograma />} />
+       <Route path="/cronograma-2" element={<Cronograma2 />} />
       </Routes>
     </BrowserRouter>
   );
