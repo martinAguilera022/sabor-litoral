@@ -13,20 +13,18 @@ function Ubicacion() {
 const dragStart = useRef({ x: 0, y: 0 });
 const initialPosition = useRef({ x: 0, y: 0 });
 
-  const limitarPosicion = (x, y, nivelZoom, elemento) => {
-    if (!elemento || nivelZoom <= 1) {
-      return { x: 0, y: 0 };
-    }
+const limitarPosicion = (x, y, nivelZoom, elemento) => {
+ if (!elemento) {
+  return { x: 0, y: 0 };
+}
+const maxX = elemento.clientWidth * 0.5;
+const maxY = elemento.clientHeight * 1.2;
 
-    const maxX = (elemento.clientWidth * (nivelZoom - 1)) / 2;
-    const maxY = (elemento.clientHeight * (nivelZoom - 1)) / 2;
-
-    return {
-      x: Math.max(-maxX, Math.min(maxX, x)),
-      y: Math.max(-maxY, Math.min(maxY, y))
-    };
+  return {
+    x: Math.max(-maxX, Math.min(maxX, x)),
+    y: Math.max(-maxY, Math.min(maxY, y))
   };
-
+};
 
   const cambiarZoom = (cantidad) => {
     setZoom((actual) => {
@@ -47,20 +45,18 @@ const initialPosition = useRef({ x: 0, y: 0 });
     });
   };
 
-  const iniciarArrastre = (e) => {
-    if (zoom <= 1) return;
+const iniciarArrastre = (e) => {
+  e.currentTarget.setPointerCapture(e.pointerId);
 
-    e.currentTarget.setPointerCapture(e.pointerId);
+  setDragging(true);
 
-    setDragging(true);
-
-    dragStart.current = {
-      x: e.clientX,
-      y: e.clientY
-    };
-
-    initialPosition.current = { ...position };
+  dragStart.current = {
+    x: e.clientX,
+    y: e.clientY
   };
+
+  initialPosition.current = { ...position };
+};
 
   const moverMapa = (e) => {
     if (!dragging) return;
@@ -85,13 +81,10 @@ const initialPosition = useRef({ x: 0, y: 0 });
   };
 
  return (
-  <motion.section
+  <section
     className="ubicacion"
     id="ubicacion"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 2.5, ease: "easeInOut" }}
+    
   >
 
     <div className="mapa-contenedor">
@@ -105,7 +98,11 @@ const initialPosition = useRef({ x: 0, y: 0 });
         onPointerCancel={terminarArrastre}
         onLostPointerCapture={terminarArrastre}
       >
-        <img
+        <motion.img
+        initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 2.5, ease: "easeInOut" }}
           className="mapa-imagen"
           src="/assets/mapita-23.webp"
           alt="Mapa del predio del festival"
@@ -141,7 +138,7 @@ const initialPosition = useRef({ x: 0, y: 0 });
       </div>
     </div>
 
-  </motion.section>
+  </section>
 );}
 const ASSETS = '/assets/';
 

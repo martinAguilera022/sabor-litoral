@@ -840,6 +840,7 @@ select {
 	z-index: 2;
 	overflow: visible;
 	clip-path: inset(0 0 11% 0);
+	pointer-events: none;
 }
 
 /* Texto y formulario */
@@ -1236,4 +1237,20 @@ select {
 	.main-nav .nav-ticket {
 		flex-shrink: 0;
 	}
+}
+.invitados-cronograma {
+	transition:
+		transform 0.35s ease,
+		box-shadow 0.35s ease,
+		filter 0.35s ease;
+}
+
+.invitados-cronograma:hover {
+	transform: translateY(-5px) scale(1.04);
+	filter: brightness(1.08);
+	box-shadow: 0 8px 18px rgba(80, 48, 30, 0.2);
+}
+
+.invitados-cronograma:active {
+	transform: translateY(-1px) scale(0.98);
 }
